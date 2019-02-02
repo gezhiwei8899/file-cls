@@ -25,7 +25,7 @@ public final class DataSourceConfig {
         dataSource = new HikariDataSource(config);
     }
 
-    public static Connection getConn() {
+    public synchronized static Connection getConn() {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
