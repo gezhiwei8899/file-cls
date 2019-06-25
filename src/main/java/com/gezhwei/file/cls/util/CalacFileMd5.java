@@ -1,4 +1,4 @@
-package com.gezhwei.file.cls;
+package com.gezhwei.file.cls.util;
 
 import java.io.File;
 import java.io.FileInputStream;

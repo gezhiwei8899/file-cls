@@ -1,4 +1,4 @@
-package com.gezhwei.file.cls;
+package com.gezhwei.file.cls.dto;
 
 import lombok.Getter;
 import lombok.Setter;

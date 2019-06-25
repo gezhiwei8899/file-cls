@@ -1,6 +1,6 @@
 package com.gezhwei.file.cls.handler;
 
-import com.gezhwei.file.cls.FileQueue;
+import com.gezhwei.file.cls.queque.FileQueue;
 
 import java.io.File;
 

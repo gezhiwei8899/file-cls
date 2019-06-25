@@ -1,4 +1,4 @@
-package com.gezhwei.file.cls;
+package com.gezhwei.file.cls.queque;
 
 import java.io.File;
 import java.util.concurrent.ArrayBlockingQueue;
