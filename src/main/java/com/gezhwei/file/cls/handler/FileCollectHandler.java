@@ -1,27 +1,38 @@
-package com.gezhwei.file.cls.impl;
+package com.gezhwei.file.cls.handler;
 
-import com.gezhwei.file.cls.api.FileCollectionApi;
-import com.gezhwei.file.cls.store.FileStore;
+import com.gezhwei.file.cls.FileQueue;
 
 import java.io.File;
 
-public class FileCollectionApiImpl implements FileCollectionApi {
+public class FileCollectHandler implements FileHandler {
+
+    private FileHandler fileHandler;
+
+    private String path;
+
+    public FileCollectHandler(String path, FileHandler fileHandler) {
+        this.fileHandler = fileHandler;
+    }
+
     @Override
-    public void collectFilesByPath(String targetPath) {
-        File file = new File(targetPath);
+    public void handler() {
+        File file = new File(path);
         if (!file.isDirectory()) {
-            System.err.println(targetPath + " 不是一个文件夹");
+            System.err.println(path + " 不是一个文件夹");
             return;
         }
         if (file.exists()) {
             collectingFile(file);
         }
-
-        FileStore.setIsCollectedOK(true);
+        fileHandler.handler();
     }
+
 
     private void collectingFile(File f) {
         File[] files = f.listFiles();
+        if (null == files || files.length <= 0) {
+            return;
+        }
         for (File file : files) {
             if (file.isDirectory()) {
                 collectingFile(file);
@@ -29,7 +40,7 @@ public class FileCollectionApiImpl implements FileCollectionApi {
                 if (file.getName().startsWith("$RECY") || file.getName().startsWith("System V")) {
                     continue;
                 }
-                FileStore.collectFile(file);
+                FileQueue.add(file);
                 System.out.println("收集文件： " + file.getName());
             }
         }
